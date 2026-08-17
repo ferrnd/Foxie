@@ -1,14 +1,17 @@
 import { Link } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 
+const BackgroundImage = require("../../assets/images/backgrounds/index.png")
+
 export default function HomeScreen() {
   return (
+    <ImageBackground source={BackgroundImage} style={styles.backgroundImage} resizeMode="cover">
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <LinearGradient
-        colors={["#19db7a", "#000000"]}
+        colors={["#AB5282", "#AB631C"]}
         start={{ x: 0, y: 0}}
         end={{ x: 1, y: 0}}
         style={styles.hero}
@@ -41,13 +44,16 @@ export default function HomeScreen() {
         </Link>
       </View>
     </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+  },
   safeArea: {
     flex: 1,
-    backgroundColor: "#050505",
   },
   container: {
     flex: 1,
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignItems: "center",
     backgroundColor: "#ffffff",
-    marginBottom: 20
+    marginBottom: 50
   },
   buttonText: {
     fontSize: 16,

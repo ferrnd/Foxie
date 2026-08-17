@@ -3,9 +3,24 @@ import { Tabs } from "expo-router";
 export default function TabsLayout() {
   return (
     <Tabs
+    sceneContainerStyle={{ backgroundColor: "transparent" }}
       screenOptions={{
         headerShadowVisible: false,
-        tabBarActiveTintColor: "#27a566",
+        headerTransparent: true,
+        headerStyle: {
+          backgroundColor: 'transparent',
+        },
+        headerTintColor: '#FFFFFF',
+        tabBarStyle: {
+          backgroundColor: 'transparent',
+          position: "absolute",
+          borderTopWidth: 0,
+          elevation: 0,
+          height: 80,
+          paddingBottom: 25,
+          paddingTop: 10,
+        },
+        tabBarActiveTintColor: "#fefffe",
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: "600",
@@ -16,7 +31,7 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: "Início",
-          headerTitle: "Projeto Base",
+          headerTitle: "",
         }}
       />
       <Tabs.Screen
