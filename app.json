@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "ferrnd",
+    "slug": "ferrnd",
+    "scheme": "ferrnd",
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
