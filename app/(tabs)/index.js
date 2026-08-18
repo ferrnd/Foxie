@@ -2,48 +2,38 @@ import { Link } from "expo-router";
 import { Image, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
 
 const BackgroundImage = require("../../assets/images/backgrounds/index.png")
 
 export default function HomeScreen() {
   return (
     <ImageBackground source={BackgroundImage} style={styles.backgroundImage} resizeMode="cover">
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <LinearGradient
-        colors={["#AB5282", "#AB631C"]}
-        start={{ x: 0, y: 0}}
-        end={{ x: 1, y: 0}}
-        style={styles.hero}
-        >
-          <Text style={styles.eyebrow}>React Native + Expo Router</Text>
-          <Text style={styles.title}>Seu app já nasce organizado</Text>
-          <Text style={styles.description}>
-            Estrutura pronta para o aluno focar em componentes, navegação e
-            lógica de negócio desde a primeira aula.
-          </Text>
-        </LinearGradient>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.container}>
+          <View style={styles.heroContainer}>
+            <BlurView intensity={40} tint="dark">
+              <View style={styles.heroContent}>
+                <Text style={styles.title}>FOXIE</Text>
+                <Text style={styles.description}>Estrutura pronta para o aluno focar em componentes, navegação e
+                  lógica de negócio desde a primeira aula.</Text>
+              </View>
+            </BlurView>
+          </View>
 
-        <LinearGradient
-        colors={['#ffffff', '#ffffff']}
-        start={{x: 0, y: 0}}
-        end={{x:0.5, y:2}}
-        style={styles.card}
-        >
-          <Text style={styles.cardTitle}>O que vem configurado</Text>
-          <Text style={styles.cardItem}>• JavaScript habilitado</Text>
-          <Text style={styles.cardItem}>• Rotas com expo-router</Text>
-          <Text style={styles.cardItem}>• Abas e modal de exemplo</Text>
-          <Text style={styles.cardItem}>• Scripts para Android, iOS e Web</Text>
-        </LinearGradient>
-
-        <Link href="/modal" asChild>
-          <Pressable style={styles.button}>
-            <Text style={styles.buttonText}>Abrir modal de exemplo</Text>
-          </Pressable>
-        </Link>
-      </View>
-    </SafeAreaView>
+          <Link href="/modal" asChild>
+            <Pressable style={styles.button}>
+              <LinearGradient
+                colors={["#AB5282", "#AB631C"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.buttonGradient}>
+                <Text style={styles.buttonText}>Abrir modal de exemplo</Text>
+              </LinearGradient>
+            </Pressable>
+          </Link>
+        </View>
+      </SafeAreaView>
     </ImageBackground>
   );
 }
@@ -59,14 +49,14 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     gap: 20,
-    justifyContent: 'space-between'
-    
+    justifyContent: 'flex-end'
+
   },
   hero: {
     alignItems: "center",
     gap: 10,
     padding: 74,
-    borderRadius: 24,
+    borderRadius: 55,
   },
   eyebrow: {
     fontSize: 13,
@@ -91,7 +81,7 @@ const styles = StyleSheet.create({
   card: {
     gap: 8,
     padding: 20,
-    borderRadius: 20,
+    borderRadius: 55,
     backgroundColor: "#ffffff",
   },
   cardTitle: {
@@ -104,16 +94,32 @@ const styles = StyleSheet.create({
     color: "#000000",
   },
   button: {
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    borderRadius: 16,
-    alignItems: "center",
-    backgroundColor: "#ffffff",
+    width: "100%",
+    borderRadius: 55,
+    overflow: "hidden",
     marginBottom: 50
+  },
+  buttonGradient: {
+    width: "100%",
+    paddingVertical: 24,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 55,
   },
   buttonText: {
     fontSize: 16,
     fontWeight: "700",
-    color: "#050505",
+    color: "#ffffff",
   },
+  heroContainer: {
+    borderRadius: 55,
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.12)"
+  },
+  heroContent: {
+    alignItems: "center",
+    gap: 10,
+    padding: 24,
+  }
 });
