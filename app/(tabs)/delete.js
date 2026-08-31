@@ -57,40 +57,41 @@ export default function AnimeExcluirScreen() {
   }, []);
 
   // Sempre confirma antes de apagar de verdade — não tem como desfazer.
-  function confirmarExclusao(anime) {
-    Alert.alert(
-      "Excluir anime",
-      `Tem certeza que quer excluir "${anime.title}"? Essa ação não pode ser desfeita.`,
-      [
-        { text: "Cancelar", style: "cancel" },
-        {
-          text: "Excluir",
-          style: "destructive",
-          onPress: () => excluirAnime(anime.id),
-        },
-      ]
-    );
-  }
-
+  
   async function excluirAnime(id) {
-    setExcluindoId(id);
-    try {
-      // DELETE não manda corpo — só o id na URL, identificando o que apagar.
-      await api.delete(`/api/animes/${id}`);
-
-      // Em vez de buscar a lista de novo na API, só tiramos o item
-      // apagado do estado local — a tela atualiza na hora.
-      setAnime((atual) => atual.filter((item) => item.id !== id));
-    } catch (e) {
-      Alert.alert(
-        "Não deu pra excluir o anime",
-        "A API respondeu com erro. Tenta de novo em instantes."
-      );
-    } finally {
-      setExcluindoId(null);
+      setExcluindoId(id);
+      try {
+          // DELETE não manda corpo — só o id na URL, identificando o que apagar.
+          await api.delete(`/api/animes/${id}`);
+          
+          // Em vez de buscar a lista de novo na API, só tiramos o item
+          // apagado do estado local — a tela atualiza na hora.
+          setAnime((atual) => atual.filter((item) => item.id !== id));
+        } catch (e) {
+            Alert.alert(
+                "Não deu pra excluir o anime",
+                "A API respondeu com erro. Tenta de novo em instantes."
+            );
+        } finally {
+            setExcluindoId(null);
+        }
     }
-  }
-
+    
+    function confirmarExclusao(anime) {
+      Alert.alert(
+        "Excluir anime",
+        `Tem certeza que quer excluir "${anime.title}"? Essa ação não pode ser desfeita.`,
+        [
+          { text: "Cancelar", style: "cancel" },
+          {
+            text: "Excluir",
+            style: "destructive",
+            onPress: () => excluirAnime(anime.id),
+          },
+        ]
+      );
+    }
+    
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.conteudo}>
