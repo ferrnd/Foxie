@@ -103,7 +103,7 @@ export default function AnimesBuscarScreen() {
                             <Text style={styles.categoria}>
                                 {anime.estudio} · {anime.genero}
                             </Text>
-                            <Text style={styles.fraqueza}>{anime.description}</Text>
+                            <Text style={styles.fraqueza}>{anime.numero_episodios} episódios · {anime.ano_lancamento}</Text>
                         </View>
                     </View>
                 )}

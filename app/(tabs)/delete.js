@@ -27,8 +27,8 @@ const api = axios.create({
 });
 
 // ---------- DELETE: apagar um anime existente ----------
-export default function AnimeExcluirScreen() {
-  const [anime, setAnime] = useState([]);
+export default function AnimesExcluirScreen() {
+  const [animes, setAnimes] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState(null);
 
@@ -37,14 +37,14 @@ export default function AnimeExcluirScreen() {
   // DELETE daquele item específico está em andamento.
   const [excluindoId, setExcluindoId] = useState(null);
 
-  async function buscarAnime() {
+  async function buscarAnimes() {
     setCarregando(true);
     setErro(null);
     try {
       const resposta = await api.get("/api/animes", {
         params: { limit: 50 },
       });
-      setAnime(resposta.data.data);
+      setAnimes(resposta.data.data);
     } catch (e) {
       setErro("Não foi possível carregar os animes. Tenta de novo em instantes.");
     } finally {
@@ -53,45 +53,44 @@ export default function AnimeExcluirScreen() {
   }
 
   useEffect(() => {
-    buscarAnime();
+    buscarAnimes();
   }, []);
 
   // Sempre confirma antes de apagar de verdade — não tem como desfazer.
-  
+  function confirmarExclusao(anime) {
+    Alert.alert(
+      "Excluir anime",
+      `Tem certeza que quer excluir "${anime.title}"? Essa ação não pode ser desfeita.`,
+      [
+        { text: "Cancelar", style: "cancel" },
+        {
+          text: "Excluir",
+          style: "destructive",
+          onPress: () => excluirAnime(anime.id),
+        },
+      ]
+    );
+  }
+
   async function excluirAnime(id) {
-      setExcluindoId(id);
-      try {
-          // DELETE não manda corpo — só o id na URL, identificando o que apagar.
-          await api.delete(`/api/animes/${id}`);
-          
-          // Em vez de buscar a lista de novo na API, só tiramos o item
-          // apagado do estado local — a tela atualiza na hora.
-          setAnime((atual) => atual.filter((item) => item.id !== id));
-        } catch (e) {
-            Alert.alert(
-                "Não deu pra excluir o anime",
-                "A API respondeu com erro. Tenta de novo em instantes."
-            );
-        } finally {
-            setExcluindoId(null);
-        }
-    }
-    
-    function confirmarExclusao(anime) {
+    setExcluindoId(id);
+    try {
+      // DELETE não manda corpo — só o id na URL, identificando o que apagar.
+      await api.delete(`/api/animes/${id}`);
+
+      // Em vez de buscar a lista de novo na API, só tiramos o item
+      // apagado do estado local — a tela atualiza na hora.
+      setAnimes((atual) => atual.filter((item) => item.id !== id));
+    } catch (e) {
       Alert.alert(
-        "Excluir anime",
-        `Tem certeza que quer excluir "${anime.title}"? Essa ação não pode ser desfeita.`,
-        [
-          { text: "Cancelar", style: "cancel" },
-          {
-            text: "Excluir",
-            style: "destructive",
-            onPress: () => excluirAnime(anime.id),
-          },
-        ]
+        "Não deu pra excluir o anime",
+        "A API respondeu com erro. Tenta de novo em instantes."
       );
+    } finally {
+      setExcluindoId(null);
     }
-    
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.conteudo}>
@@ -104,13 +103,13 @@ export default function AnimeExcluirScreen() {
         {erro && <Text style={styles.erro}>{erro}</Text>}
 
         {!carregando &&
-          anime.map((item) => (
+          animes.map((item) => (
             <View key={item.id} style={styles.card}>
               <Image source={{ uri: item.imageUrl }} style={styles.imagem} />
               <View style={styles.info}>
                 <Text style={styles.titulo}>{item.title}</Text>
                 <Text style={styles.categoria}>
-                  {item.universo} · {item.poder}
+                  {item.estudio} · {item.genero}
                 </Text>
               </View>
               <Pressable

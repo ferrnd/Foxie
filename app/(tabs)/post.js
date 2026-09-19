@@ -11,8 +11,13 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 
+// Em produção, uma chave de API não deveria morar direto no código do
+// app (dá pra extrair de qualquer APK/IPA instalado). Aqui, como é uma
+// API pública de estudo, deixamos direto no código pra simplificar.
 const API_KEY = "cv__knrQc1d6TZu3-ECOLCkLGckcT5fYDOZF4P9gcvHi0-Paa58IDak9PX4swBhl8J8";
 
+// Mesma instância do axios usada na tela de listagem, com o header já
+// configurado — toda chamada feita com "api" já sai autenticada.
 const api = axios.create({
   baseURL: "https://api-ds.codeverse.dev.br",
   headers: {
@@ -20,19 +25,25 @@ const api = axios.create({
   },
 });
 
+// ---------- POST: criar um anime novo ----------
+// Campos confirmados testando a API de verdade: title e imageUrl
+// (genéricos) + genero, numero_episodios, ano_lancamento e estudio
+// (específicos do tema animes). O banco reseta a cada 8h e os campos
+// específicos podem mudar de tema pra tema (e até de reset pra reset) —
+// sempre vale dar um GET antes de assumir o formato dos dados.
 export default function AnimesCriarScreen() {
   const [titulo, setTitulo] = useState("");
-  const [descricao, setDescricao] = useState("");
   const [imagemUrl, setImagemUrl] = useState("");
-  const [estudio, setEstudio] = useState("");
-  const [baseadoEmManga, setBaseadoEmManga] = useState("");
   const [genero, setGenero] = useState("");
+  const [numeroEpisodios, setNumeroEpisodios] = useState("");
+  const [anoLancamento, setAnoLancamento] = useState("");
+  const [estudio, setEstudio] = useState("");
 
   const [enviando, setEnviando] = useState(false);
 
   async function criarAnime() {
     if (!titulo) {
-      Alert.alert("Aviso", "Preencha pelo menos o título.");
+      Alert.alert("Preencha pelo menos o título.");
       return;
     }
 
@@ -40,28 +51,25 @@ export default function AnimesCriarScreen() {
     try {
       const resposta = await api.post("/api/animes", {
         title: titulo,
-        description: descricao, 
-        imageUrl: imagemUrl, 
-        estudio: estudio,
-        baseado_em_manga: baseadoEmManga.toLowerCase().trim() === "sim",
-        genero: genero,
+        imageUrl: imagemUrl,
+        genero,
+        numero_episodios: Number(numeroEpisodios),
+        ano_lancamento: Number(anoLancamento),
+        estudio,
       });
 
       Alert.alert("Anime criado!", resposta.data.title);
-      
       setTitulo("");
-      setDescricao("");
       setImagemUrl("");
-      setEstudio("");
-      setBaseadoEmManga("");
       setGenero("");
-      
+      setNumeroEpisodios("");
+      setAnoLancamento("");
+      setEstudio("");
     } catch (e) {
-      console.log("RESPOSTA DA API (ERRO):", e.response?.data);
-      
-      const mensagemErro = e.response?.data?.error || "Verifique os dados e tente novamente.";
-      
-      Alert.alert("Não deu pra criar o anime", mensagemErro);
+      Alert.alert(
+        "Não deu pra criar o anime",
+        "A API respondeu com erro. Confere se todos os campos estão certinhos e tenta de novo."
+      );
     } finally {
       setEnviando(false);
     }
@@ -71,7 +79,7 @@ export default function AnimesCriarScreen() {
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.conteudo}>
         <View style={styles.header}>
-          <Text style={styles.tituloPagina}>Criar Anime</Text>
+          <Text style={styles.tituloPagina}>Criar anime</Text>
           <Text style={styles.subtitulo}>POST /api/animes</Text>
         </View>
 
@@ -80,53 +88,55 @@ export default function AnimesCriarScreen() {
           style={styles.campo}
           value={titulo}
           onChangeText={setTitulo}
-          placeholder="Ex: Naruto Shippuden"
+          placeholder="Ex: Naruto"
         />
 
-        <Text style={styles.rotulo}>Descrição</Text>
-        <TextInput
-          style={styles.campo}
-          value={descricao}
-          onChangeText={setDescricao}
-          placeholder="Ex: A jornada de um ninja renegado..."
-        />
-
-        <Text style={styles.rotulo}>URL da imagem (Deve ser HTTP/HTTPS)</Text>
+        <Text style={styles.rotulo}>URL da imagem</Text>
         <TextInput
           style={styles.campo}
           value={imagemUrl}
           onChangeText={setImagemUrl}
-          placeholder="Ex: https://site.com/naruto.jpg"
+          placeholder="Ex: https://exemplo.com/naruto.jpg"
         />
 
-        <Text style={styles.secao}>Campos específicos do tema Animes</Text>
-
-        <Text style={styles.rotulo}>Estúdio</Text>
-        <TextInput
-          style={styles.campo}
-          value={estudio}
-          onChangeText={setEstudio}
-          placeholder="Ex: Studio Pierrot"
-        />
-
-        <Text style={styles.rotulo}>Baseado em Mangá?</Text>
-        <TextInput
-          style={styles.campo}
-          value={baseadoEmManga}
-          onChangeText={setBaseadoEmManga}
-          placeholder="Ex: Sim (ou o nome do mangá)"
-        />
+        <Text style={styles.secao}>Campos específicos do tema animes</Text>
 
         <Text style={styles.rotulo}>Gênero</Text>
         <TextInput
           style={styles.campo}
           value={genero}
           onChangeText={setGenero}
-          placeholder="Ex: Shounen, Ação"
+          placeholder="Ex: Ação"
+        />
+
+        <Text style={styles.rotulo}>Número de episódios</Text>
+        <TextInput
+          style={styles.campo}
+          value={numeroEpisodios}
+          onChangeText={setNumeroEpisodios}
+          placeholder="Ex: 220"
+          keyboardType="numeric"
+        />
+
+        <Text style={styles.rotulo}>Ano de lançamento</Text>
+        <TextInput
+          style={styles.campo}
+          value={anoLancamento}
+          onChangeText={setAnoLancamento}
+          placeholder="Ex: 2002"
+          keyboardType="numeric"
+        />
+
+        <Text style={styles.rotulo}>Estúdio</Text>
+        <TextInput
+          style={styles.campo}
+          value={estudio}
+          onChangeText={setEstudio}
+          placeholder="Ex: Pierrot"
         />
 
         <Pressable style={styles.botao} onPress={criarAnime} disabled={enviando}>
-          <Text style={styles.botaoTexto}>{enviando ? "Enviando..." : "Criar Anime"}</Text>
+          <Text style={styles.botaoTexto}>{enviando ? "Enviando..." : "Criar anime"}</Text>
         </Pressable>
       </ScrollView>
     </SafeAreaView>
@@ -146,6 +156,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 8,
   },
+
   rotulo: { fontSize: 13, fontWeight: "600", color: "#334155", marginBottom: 4 },
   campo: {
     borderWidth: 1,
