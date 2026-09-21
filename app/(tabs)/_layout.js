@@ -1,68 +1,72 @@
-import { Tabs } from "expo-router";
+import { Tabs } from 'expo-router';
 
 export default function TabsLayout() {
-  return (
-    <Tabs
-    sceneContainerStyle={{ backgroundColor: "transparent" }}
-      screenOptions={{
-        headerShadowVisible: false,
-        headerTransparent: true,
-        headerStyle: {
-          backgroundColor: 'transparent',
-        },
-        headerTintColor: '#FFFFFF',
-        tabBarStyle: {
-          backgroundColor: 'transparent',
-          position: "absolute",
-          borderTopWidth: 0,
-          elevation: 0,
-          height: 80,
-          paddingBottom: 25,
-          paddingTop: 10,
-        },
-        tabBarActiveTintColor: "#fefffe",
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: "600",
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Início",
-          headerTitle: "",
-        }}
-      />
-      <Tabs.Screen
-        name="aulas"
-        options={{
-          title: "Aulas",
-          headerTitle: "Conteúdo",
-        }}
-      />
-      <Tabs.Screen
-        name="interface"
-        options={{
-          title: "Interface",
-          headerTitle: "Interface",
-        }}
-      />
-      
-      <Tabs.Screen
-        name="api"
-        options={{
-          title: "Api",
-          headerTitle: "Api",
-        }}
-      />
-      <Tabs.Screen
-        name="post"
-        options={{
-          title: "Post",
-          headerTitle: "Post",
-        }}
-      />
-    </Tabs>
-  );
+    return (
+        <Tabs
+            screenOptions={{
+                headerShadowVisible: false,
+                tabBarActiveTintColor: '#48ff66',
+                tabBarLabelStyle: {
+                    fontSize: 12,
+                    fontWeight: '600',
+                },
+            }}>
+            <Tabs.Screen
+                name="index"
+                options={{
+                    title: 'Início',
+                    headerTitle: 'Projeto Base',
+                }}
+            />
+            <Tabs.Screen
+                name="aulas"
+                options={{
+                    title: 'Aulas',
+                    headerTitle: 'Conteúdo',
+                }}
+            />
+                <Tabs.Screen
+                    name="sobre"
+                    options={{
+                        title: 'Sobre',
+                        headerTitle: 'Sobre',
+                    }}
+                />
+                <Tabs.Screen
+                    name="post"
+                    options={{
+                        title: 'Create',
+                        headerTitle: 'Create',
+                    }}
+                />
+            <Tabs.Screen
+                name="api"
+                options={{
+                    title: 'Read',
+                    headerTitle: 'Read',
+                }}
+            />
+            <Tabs.Screen
+                name="put"
+                options={{
+                    title: 'Update',
+                    headerTitle: 'Update',
+                }}
+            />
+            <Tabs.Screen
+                name="delete"
+                options={{
+                    title: 'Delete',
+                    headerTitle: 'Delete',
+                }}
+            />
+                <Tabs.Screen
+                    name="getById"
+                    options={{
+                        title: 'GetByID',
+                        headerTitle: 'GetByID',
+                    }}
+                />
+        </Tabs>
+    );
 }

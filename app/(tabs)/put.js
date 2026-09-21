@@ -202,13 +202,13 @@ export default function AnimesEditarScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: "#f8fbff" },
+  safeArea: { flex: 1, backgroundColor: "#070707" },
   conteudo: { padding: 24, paddingBottom: 48 },
   header: { marginBottom: 16 },
-  tituloPagina: { fontSize: 24, fontWeight: "800", color: "#102542" },
-  subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 },
+  tituloPagina: { fontSize: 24, fontWeight: "800", color: "#ffffff" },
+  subtitulo: { fontSize: 14, color: "#ffffff", marginTop: 2 },
 
-  instrucao: { fontSize: 14, color: "#334155", marginBottom: 8 },
+  instrucao: { fontSize: 14, color: "#fdfdfd", marginBottom: 8 },
   erro: { color: "#c62828", marginTop: 12 },
 
   linha: {
@@ -221,8 +221,8 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     marginBottom: 8,
   },
-  linhaTitulo: { fontSize: 15, fontWeight: "700", color: "#102542" },
-  linhaSeta: { fontSize: 13, color: "#1565c0", fontWeight: "600" },
+  linhaTitulo: { fontSize: 15, fontWeight: "700", color: "#030303" },
+  linhaSeta: { fontSize: 13, color: "#22e24c", fontWeight: "600" },
 
   voltar: { marginBottom: 16 },
   voltarTexto: { color: "#1565c0", fontWeight: "700" },

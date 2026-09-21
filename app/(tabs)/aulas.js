@@ -34,9 +34,10 @@ export default function LessonsScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#fffdf7",
+    backgroundColor: "#050505",
   },
   container: {
+    justifyContent: "center",
     flex: 1,
     padding: 24,
     gap: 16,
@@ -44,12 +45,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "800",
-    color: "#3d2c00",
+    color: "#ffffff",
   },
   description: {
     fontSize: 16,
     lineHeight: 24,
-    color: "#5f4b1b",
+    color: "#ffffff",
   },
   list: {
     gap: 12,
@@ -71,11 +72,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "700",
     color: "#ffffff",
-    backgroundColor: "#f59e0b",
+    backgroundColor: "#48ff66",
   },
   listText: {
     flex: 1,
     fontSize: 15,
-    color: "#3d2c00",
+    color: "#000000",
   },
 });

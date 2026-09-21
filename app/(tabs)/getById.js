@@ -113,13 +113,13 @@ export default function AnimesBuscarScreen() {
 }
 
 const styles = StyleSheet.create({
-    safeArea: { flex: 1, backgroundColor: "#f8fbff" },
-    conteudo: { padding: 24, paddingBottom: 48 },
+    safeArea: { flex: 1, backgroundColor: "#020202" },
+    conteudo: { padding: 24, paddingBottom: 48, flex: 1, justifyContent: 'center' },
     header: { marginBottom: 16 },
-    tituloPagina: { fontSize: 24, fontWeight: "800", color: "#102542" },
-    subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 },
+    tituloPagina: { fontSize: 24, fontWeight: "800", color: "#ffffff" },
+    subtitulo: { fontSize: 14, color: "#ffffff", marginTop: 2 },
 
-    rotulo: { fontSize: 13, fontWeight: "600", color: "#334155", marginBottom: 4 },
+    rotulo: { fontSize: 13, fontWeight: "600", color: "#ffffff", marginBottom: 4 },
     linhaBusca: { flexDirection: "row", gap: 8, alignItems: "flex-start" },
     campo: {
         flex: 1,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
     },
     botao: {
-        backgroundColor: "#1565c0",
+        backgroundColor: "#47ff40",
         paddingHorizontal: 18,
         borderRadius: 8,
         alignItems: "center",

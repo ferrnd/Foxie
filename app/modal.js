@@ -18,7 +18,7 @@ export default function ModalScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#f3f7ff",
+    backgroundColor: "#070707",
   },
   container: {
     flex: 1,
@@ -29,11 +29,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "700",
-    color: "#102542",
+    color: "#ffffff",
   },
   description: {
     fontSize: 16,
     lineHeight: 24,
-    color: "#334e68",
+    color: "#ffffff",
   },
 });

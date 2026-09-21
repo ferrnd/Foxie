@@ -1,125 +1,120 @@
 import { Link } from "expo-router";
-import { Image, ImageBackground, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
-import { BlurView } from "expo-blur";
-
-const BackgroundImage = require("../../assets/images/backgrounds/index.png")
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function HomeScreen() {
   return (
-    <ImageBackground source={BackgroundImage} style={styles.backgroundImage} resizeMode="cover">
-      <SafeAreaView style={styles.safeArea}>
-        <View style={styles.container}>
-          <View style={styles.heroContainer}>
-            <BlurView intensity={40} tint="dark">
-              <View style={styles.heroContent}>
-                <Text style={styles.title}>FOXIE</Text>
-                <Text style={styles.description}>Estrutura pronta para o aluno focar em componentes, navegação e
-                  lógica de negócio desde a primeira aula.</Text>
-              </View>
-            </BlurView>
-          </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <LinearGradient
+          colors={['#48ff66', '#030303']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.hero}
+        >
+          <Text style={styles.eyebrow}>React Native + Expo Router</Text>
+          <Text style={styles.title}>Seu app já nasce organizado</Text>
+          <Text style={styles.description}>
+            Estrutura pronta para o aluno focar em componentes, navegação e
+            lógica de negócio desde a primeira aula.
+          </Text>
+        </LinearGradient>
 
-          <Link href="/modal" asChild>
-            <Pressable style={styles.button}>
-              <LinearGradient
-                colors={["#AB5282", "#AB631C"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.buttonGradient}>
-                <Text style={styles.buttonText}>Abrir modal de exemplo</Text>
-              </LinearGradient>
-            </Pressable>
-          </Link>
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>O que vem configurado</Text>
+          <Text style={styles.cardItem}>• JavaScript habilitado</Text>
+          <Text style={styles.cardItem}>• Rotas com expo-router</Text>
+          <Text style={styles.cardItem}>• Abas e modal de exemplo</Text>
+          <Text style={styles.cardItem}>• Scripts para Android, iOS e Web</Text>
         </View>
-      </SafeAreaView>
-    </ImageBackground>
+
+        <Link href="/modal" asChild>
+          <Pressable style={styles.button}>
+            <LinearGradient
+              colors={['#48ff66', '#050505']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.buttonGradient}
+            >
+              <Text style={styles.buttonText}>Abrir modal de exemplo</Text>
+            </LinearGradient>
+          </Pressable>
+        </Link>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-  },
   safeArea: {
     flex: 1,
+    backgroundColor: '#000000',
   },
   container: {
+    justifyContent: 'center',
     flex: 1,
     padding: 24,
     gap: 20,
-    justifyContent: 'flex-end'
-
   },
   hero: {
-    alignItems: "center",
+    alignItems: 'center',
     gap: 10,
-    padding: 74,
-    borderRadius: 55,
+    padding: 24,
+    borderRadius: 24,
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 4,
   },
   eyebrow: {
     fontSize: 13,
-    fontWeight: "700",
+    fontWeight: '700',
     letterSpacing: 1,
-    textTransform: "uppercase",
-    color: "#fafafa",
-    textAlign: "center",
+    textTransform: 'uppercase',
+    color: '#ffffff',
+    textAlign: 'center',
   },
   title: {
     fontSize: 32,
-    fontWeight: "800",
-    color: "#ffffff",
-    textAlign: "center",
+    fontWeight: '800',
+    color: '#ffffff',
+    textAlign: 'center',
   },
   description: {
     fontSize: 16,
     lineHeight: 24,
-    color: "#ffffff",
-    textAlign: "center",
+    color: '#ffffff',
+    textAlign: 'center',
   },
   card: {
     gap: 8,
     padding: 20,
-    borderRadius: 55,
-    backgroundColor: "#ffffff",
+    borderRadius: 20,
+    backgroundColor: '#ffffff',
   },
   cardTitle: {
     fontSize: 18,
-    fontWeight: "700",
-    color: "#000000",
+    fontWeight: '700',
+    color: '#000000',
   },
   cardItem: {
     fontSize: 15,
-    color: "#000000",
+    color: '#020202',
   },
   button: {
-    width: "100%",
-    borderRadius: 55,
-    overflow: "hidden",
-    marginBottom: 50
+    borderRadius: 12,
+    overflow: 'hidden',
   },
   buttonGradient: {
-    width: "100%",
-    paddingVertical: 24,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 55,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    alignItems: 'center',
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: "700",
-    color: "#ffffff",
+    fontWeight: '700',
+    color: '#ffffff',
   },
-  heroContainer: {
-    borderRadius: 55,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.12)"
-  },
-  heroContent: {
-    alignItems: "center",
-    gap: 10,
-    padding: 24,
-  }
 });

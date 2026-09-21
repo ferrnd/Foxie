@@ -80,11 +80,11 @@ export default function AnimesListarScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: "#f8fbff" },
+  safeArea: { flex: 1, backgroundColor: "#000000" },
   conteudo: { padding: 24, paddingBottom: 48 },
   header: { marginBottom: 16 },
-  tituloPagina: { fontSize: 24, fontWeight: "800", color: "#102542" },
-  subtitulo: { fontSize: 14, color: "#5f6b7a", marginTop: 2 },
+  tituloPagina: { fontSize: 24, fontWeight: "800", color: "#fefeff" },
+  subtitulo: { fontSize: 14, color: "#ffffff", marginTop: 2 },
 
   erro: { color: "#c62828", marginTop: 12 },
   card: {
